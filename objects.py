@@ -26,3 +26,9 @@ class sphere:
 
         return normalize(gradient)
 
+class light():
+    def __init__(self, direction):
+        self.direction = normalize(cp.array(direction, dtype = cp.float32))
+
+    def rays(self):
+            return self.direction
