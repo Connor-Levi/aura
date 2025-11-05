@@ -67,7 +67,7 @@ def run():
     #clr = (ball.color[None, :] + (ball.color[None, :] * cosine[:, None])).astype(cp.uint8)
     
     # custom diffused lighting
-    diff = 75 # diffusion factor
+    diff = 200 # diffusion factor
     clr = (ball.color[None, :] + (diff * cosine[:, None])).astype(cp.uint8)
     
     # limiting color values between 0 and 255
