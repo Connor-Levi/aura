@@ -1,4 +1,5 @@
 import cupy as cp
+from util import normalize
 
 class sphere:
     def __init__(self, centre, radius, color):
