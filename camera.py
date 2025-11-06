@@ -43,3 +43,4 @@ class camera:
         
         ray_vec = normalize(ray_vec)
         return ray_vec
+
