@@ -1,5 +1,5 @@
 # Aura
-Aura is a simple raytracer built in Python, using GPU acceleration via the CuPy library. 
+Aura is a simple ray marcher built in Python, using GPU acceleration via the CuPy library. 
 
 > **Note:** This project is a work in progress and currently unfinished.
 
