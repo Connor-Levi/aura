@@ -1,4 +1,6 @@
 import cupy as cp
+import numpy as np
+
 
 class scene:
     def __init__(self, eye, objects, lights):
@@ -18,9 +20,10 @@ class scene:
                 cosine = cp.sum(normals * light_rays[None, :], axis = -1)
                 cosine = cp.clip(cosine, 0, 1) # keeping positive values only
 
-                diff = 200
-                clr = (obj.color[None, :] + (diff * cosine[:, None])).astype(cp.uint8)
+                diff = 375
+                clr = (obj.color[None, :] + (diff * cosine[:, None])).astype(cp.float32)
                 clr = cp.clip(clr, 0, 255)
+                clr = clr.astype(np.uint8)
 
                 pic[hitbox] = clr
 
