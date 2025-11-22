@@ -38,7 +38,7 @@ class sphere:
         rays = eye.rays()
         pixels = cp.broadcast_to(eye.pos, rays.shape).copy()
     
-        hitbox = cp.zeros((eye.height, eye.width), dtype = cp.float32)
+        hitbox = cp.zeros((eye.height, eye.width), dtype = cp.bool_)
 
         for i in range(steps):
             d = self.distance(pixels)
