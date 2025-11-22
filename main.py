@@ -3,6 +3,9 @@ from PIL import Image
 from scene import scene
 from camera import camera
 from objects import sphere, light
+from util import blackhole
+
+bh = True
 
 height = 1080
 width = 1980
@@ -30,6 +33,16 @@ scene = scene(eye, [ball, ball1], [photon])
 
 pic = scene.render(steps, epsilon)
 
-img = Image.fromarray(cp.asnumpy(pic))
+bx = width / 2
+by = height / 2
+
+if bh == True:
+    distorted = blackhole(pic, bx, by, 50)
+    img = Image.fromarray(cp.asnumpy(distorted))
+
+else:
+    img = Image.fromarray(cp.asnumpy(pic))
+
 img.show()
+
 
