@@ -42,7 +42,7 @@ def blackhole(img, bx, by, s):
     warped[:, :, :] = img[y1, x1]
 
     # creating an event horizon
-    horizon = 75
+    horizon = 00
 
     black = r < horizon
     warped[black] = cp.array([0, 0, 0], dtype=img.dtype)
