@@ -16,34 +16,38 @@ def blackhole(img, bx, by, s):
     warped = cp.empty_like(img)
     h, w, _ = img.shape
 
-    # calculating new coordinates
+    # new coordinates grid
     x, y = cp.meshgrid(cp.arange(w), cp.arange(h))
 
     # offset
     dx = x - bx
     dy = y - by
 
-    r = cp.sqrt(dx**2 + dy**2)
-
-    distort = strength / r
+    # radial distance
+    r = cp.sqrt(dx ** 2 + dy ** 2)
 
     # unit vectors
     i = dx / r
     j = dy / r
 
+    # distortion factor
+    distort = strength / r
+
     # new coordinates
     x1 = x - distort * i
     y1 = y - distort * j
 
-    # keeping it in range
+    # keeping the new coordinates in range of the image size
     x1 = cp.clip(x1,0, w-1).astype(cp.int32)
     y1 = cp.clip(y1,0, h-1).astype(cp.int32)
 
+    # updating the warped image
     warped[:, :, :] = img[y1, x1]
 
-    # creating an event horizon
-    horizon = 00
+    # set horizon > 0 to see enable event horizon around the centre of the black hole
+    horizon = 0
 
+    # if distance is less than the horizon, colors the pixels black
     black = r < horizon
     warped[black] = cp.array([0, 0, 0], dtype=img.dtype)
 

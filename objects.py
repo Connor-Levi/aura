@@ -33,20 +33,27 @@ class sphere:
         gradient = cp.stack((dx, dy, dz), axis=-1)
 
         return normalize(gradient)
-    
+
+    # defining ray-interaction logic based on the camera (eye)
     def hitpixels(self, eye, steps, epsilon):
         rays = eye.rays()
         pixels = cp.broadcast_to(eye.pos, rays.shape).copy()
-    
+
+        # initialising the hitbox array
         hitbox = cp.zeros((eye.height, eye.width), dtype = cp.bool_)
 
         for i in range(steps):
             d = self.distance(pixels)
 
+            # specifying a hit condition
             hit = d < epsilon
+
+            # updating
             hitbox = (hitbox + hit) > 0
 
             d = cp.where(hit, 0, d)
+
+            # updating pixels array
             pixels = pixels + rays * d[:, :, None]
 
         return self.normal(pixels[hitbox]), hitbox
